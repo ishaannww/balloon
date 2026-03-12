@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy 1 Month! ❤️</title>
+    <style>
+        /* General Theme & Crochet Vibe */
+        body {
+            background-color: #e8f5e9; 
+            color: #8b0000; 
+            font-family: 'Courier New', Courier, monospace; 
+            text-align: center;
+            overflow-x: hidden; /* Prevents horizontal scrolling from the Ferrari */
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            margin-top: 5vh; /* Uses viewport height for better mobile spacing */
+            padding: 15px;
+            animation: fadeIn 2s ease-in;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #d32f2f; 
+            text-shadow: 2px 2px #a5d6a7;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            font-weight: bold;
+            padding: 0 10px;
+        }
+
+        /* Crochet Style Boxes */
+        .chemistry-box, .kitkat-box {
+            background: #ffcdd2; 
+            border: 4px dashed #4caf50; 
+            border-radius: 20px;
+            padding: 20px 15px;
+            margin: 15px 0;
+            width: 90%; /* Much better for mobile screens */
+            max-width: 400px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .chemistry-box h2, .kitkat-box h2 {
+            margin-top: 0;
+            font-size: 1.4em;
+        }
+
+        /* Ferrari Animation */
+        .ferrari-track {
+            width: 100%;
+            height: 50px;
+            border-bottom: 3px solid #333;
+            position: relative;
+            margin: 30px 0;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 15px,
+                #fff 15px,
+                #fff 30px
+            ); 
+        }
+
+        .ferrari {
+            font-size: 40px;
+            position: absolute;
+            bottom: -5px;
+            animation: drive 3.5s linear infinite;
+        }
+
+        /* Floating Flowers & Crochet Yarn */
+        .floating-elements {
+            font-size: 28px;
+            position: absolute;
+            animation: floatUp 3s infinite ease-in-out alternate;
+            z-index: -1;
+            opacity: 0.8;
+        }
+        .f1 { left: 10%; top: 50px; animation-delay: 0s; }
+        .f2 { right: 10%; top: 150px; animation-delay: 1s; }
+        .f3 { left: 45%; top: 300px; animation-delay: 2s; }
+        .f4 { left: 20%; top: 500px; animation-delay: 1.5s; }
+        .f5 { right: 15%; top: 650px; animation-delay: 0.5s; }
+
+        /* Interactive Touch-Friendly Button */
+        .btn {
+            background-color: #d32f2f;
+            color: white;
+            border: 3px dashed white; 
+            padding: 18px 30px; /* Larger padding for easier tapping */
+            font-size: 1.2em;
+            font-family: inherit;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 6px #b71c1c;
+            transition: 0.2s;
+            margin-top: 25px;
+            width: 85%;
+            max-width: 350px;
+            -webkit-tap-highlight-color: transparent; /* Removes blue tap highlight on mobile */
+        }
+
+        .btn:active {
+            box-shadow: 0 0 #b71c1c;
+            transform: translateY(6px);
+        }
+
+        .hidden-message {
+            display: none;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-top: 30px;
+            padding: 0 15px;
+            color: #d32f2f;
+            animation: popUp 0.6s ease-out;
+            line-height: 1.4;
+        }
+
+        /* Keyframe Animations */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        @keyframes drive {
+            0% { left: -15%; }
+            100% { left: 115%; }
+        }
+        @keyframes popUp {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-30px) rotate(15deg); }
+        }
+
+        /* Small screen adjustments */
+        @media (max-width: 380px) {
+            h1 { font-size: 1.8em; }
+            .chemistry-box, .kitkat-box { padding: 15px 10px; }
+            .ferrari { font-size: 35px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="floating-elements f1">🌸🧶</div>
+    <div class="floating-elements f2">🌹</div>
+    <div class="floating-elements f3">🌺🧶</div>
+    <div class="floating-elements f4">🌷</div>
+    <div class="floating-elements f5">🌸</div>
+
+    <div class="container">
+        <h1>Happy 1 Month, Tanvi! ❤️</h1>
+        <p class="subtitle">One month down, and our bond is stronger than a covalent bond! ⚛️</p>
+        
+        <div class="ferrari-track">
+            <div class="ferrari">🏎️💨</div>
+        </div>
+
+        <div class="chemistry-box">
+            <h2>🧪 The Perfect Formula</h2>
+            <p>Pavan + Tanvi = The best reaction ever. No catalyst needed!</p>
+        </div>
+
+        <div class="kitkat-box">
+            <h2>🍫 Have a break...</h2>
+            <p>...have a KitKat. But let's never take a break from us.</p>
+        </div>
+
+        <button class="btn" onclick="revealMessage()">Tap for a Surprise!</button>
+        <div id="secretMessage" class="hidden-message">
+            I love you! Here is to many more months and perfectly timed pit stops together. 🏁❤️
+        </div>
+    </div>
+
+    <script>
+        function revealMessage() {
+            var msg = document.getElementById("secretMessage");
+            if (msg.style.display === "none" || msg.style.display === "") {
+                msg.style.display = "block";
+                setTimeout(() => {
+                    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+                }, 100); // Slight delay ensures the div is fully rendered before scrolling
+            } else {
+                msg.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+</html>
