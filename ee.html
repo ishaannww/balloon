@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>ilysmlamo</title>
+    <style>
+        :root {
+            --glass-bg: rgba(20, 20, 20, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --blur: blur(20px);
+            --text-main: #ffffff;
+            --neon-green: #00ff66;
+            --neon-red: #ff003c;
+            --ease-apple: cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            /* 1. Dynamic Mesh Gradient Background */
+            background: linear-gradient(-45deg, #001a00, #006611, #111, #660011, #00aa33);
+            background-size: 400% 400%;
+            animation: gradientBG 12s ease infinite;
+            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            overflow-x: hidden;
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* 2. Kinetic "Cool" Background Designs (SVG injected by JS) */
+        #kinetic-design-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.2; /* Subtly integrated */
+        }
+
+        /* 3. Main Content Container */
+        main {
+            position: relative;
+            z-index: 10;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            padding-bottom: 150px;
+        }
+
+        header {
+            text-align: center;
+            padding: 12vh 0 6vh 0;
+            animation: popIn 1s var(--ease-apple) forwards;
+        }
+
+        header h1 {
+            font-size: 3.8em;
+            font-weight: 800;
+            letter-spacing: -3px;
+            background: linear-gradient(135deg, #fff 0%, #aaa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(0, 255, 102, 0.5);
+        }
+
+        header p {
+            font-size: 1.2em;
+            color: #d0d0d0;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: var(--blur);
+            -webkit-backdrop-filter: var(--blur);
+            border: 1px solid var(--glass-border);
+            border-radius: 35px;
+            padding: 30px 25px;
+            margin-bottom: 35px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            transform: translateY(50px) scale(0.9);
+            opacity: 0;
+            transition: all 1s var(--ease-apple);
+        }
+
+        .glass-card.visible {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+
+        .glass-card h2 {
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            text-align: center;
+        }
+
+        .glow-green { color: var(--neon-green); text-shadow: 0 0 15px rgba(0,255,102,0.4); }
+        .glow-red { color: var(--neon-red); text-shadow: 0 0 15px rgba(255,0,60,0.4); }
+
+        /* --- VISUAL SECTION: Your Image Integration --- */
+        .image-memory-viz {
+            height: 250px;
+            width: 100%;
+            border-radius: 20px;
+            background: rgba(0,0,0,0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(255,255,255,0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4), inset 0 0 20px rgba(255,0,60,0.1);
+        }
+        
+        /* Frame the provided image and animate it */
+        .image-frame {
+            height: 90%;
+            width: 90%;
+            border-radius: 15px;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .image-memory-viz img {
+            max-height: 100%;
+            max-width: 100%;
+            border-radius: 12px;
+            filter: drop-shadow(0 0 15px rgba(255,0,60,0.3)); /* Enhance the red glow from the image */
+            animation: pulseGlow 4s infinite ease-in-out alternate;
+        }
+        
+        @keyframes pulseGlow {
+            0% { filter: drop-shadow(0 0 10px rgba(255,0,60,0.2)); transform: scale(1); }
+            100% { filter: drop-shadow(0 0 20px rgba(255,0,60,0.4)); transform: scale(1.02); }
+        }
+
+        /* --- VISUAL SECTION: Ferrari Neon Track --- */
+        .neon-track {
+            width: 100%;
+            height: 6px;
+            background: rgba(255,255,255,0.05);
+            position: relative;
+            margin: 40px 0 30px 0;
+            border-radius: 3px;
+            box-shadow: 0 0 10px var(--neon-red);
+            cursor: pointer;
+        }
+
+        .ferrari-wrapper {
+            position: absolute;
+            bottom: -22px;
+            left: -50px;
+            filter: drop-shadow(0 0 20px var(--neon-red));
+        }
+
+        /* 4. Ferrari Emoji Fix - Flip the emoji to face right */
+        .ferrari-emoji {
+            font-size: 50px;
+            transform: scaleX(-1); /* FLIPS HORIZONTALLY TO FACE FORWARD (RIGHT) */
+            display: inline-block;
+        }
+
+        .drive-normal { animation: drive 3.5s linear infinite; }
+        .drive-hyper { animation: drive 0.4s linear forwards; }
+
+        @keyframes drive {
+            0% { left: -20%; }
+            100% { left: 120%; }
+        }
+
+        /* --- VISUAL SECTION: Chemistry Lab --- */
+        .lab-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            height: 130px;
+            margin-top: 20px;
+        }
+
+        .beaker {
+            width: 55px;
+            height: 90px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top: none;
+            border-radius: 0 0 18px 18px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s;
+            overflow: hidden;
+            background: rgba(0,0,0,0.3);
+        }
+
+        .beaker:active { transform: scale(0.9) rotate(5deg); border-color: white;}
+
+        .fluid {
+            position: absolute;
+            bottom: 0; left: 0; width: 100%;
+            height: 60%;
+            transition: height 0.4s ease;
+        }
+
+        .fluid.ishaan { background: linear-gradient(0deg, #ff1100, #bd0d00); box-shadow: 0 0 20px #b30000; }
+        .fluid.sudixsha { background: linear-gradient(0deg, var(--neon-green), #afff00); box-shadow: 0 0 20px var(--neon-green); }
+
+        .bubbles {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"><circle cx="5" cy="5" r="2" fill="white" opacity="0.3"/></svg>');
+            animation: bubbleUp 1.5s linear infinite;
+            display: none;
+        }
+
+        .beaker.reacting .bubbles { display: block; }
+        .beaker.reacting .fluid { height: 95%; }
+
+        @keyframes bubbleUp {
+            0% { background-position: 0 100%; }
+            100% { background-position: 0 0; }
+        }
+
+        /* --- VISUAL SECTION: KitKat Break --- */
+        .kitkat-wrapper {
+            background: #b71c1c; /* Deep wrapper red */
+            padding: 18px;
+            border-radius: 15px;
+            color: white;
+            font-weight: 900;
+            font-size: 1.8em;
+            text-align: center;
+            letter-spacing: 5px;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.5), 0 10px 20px rgba(0,0,0,0.3);
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.2s, background 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .kitkat-wrapper:active { transform: scale(0.95); background: #d32f2f; }
+        
+        .crack {
+            position: absolute;
+            top: -10px; bottom: -10px; left: 50%;
+            width: 5px;
+            background: rgba(0,0,0,0.8);
+            transform: translateX(-50%) scaleY(0);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        .kitkat-wrapper.snapped .crack { transform: translateX(-50%) scaleY(1); }
+
+        /* --- THE FINAL MESSAGE: Hidden --- */
+        .secret-note {
+            display: none;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: var(--blur);
+            -webkit-backdrop-filter: var(--blur);
+            border: 2px solid var(--neon-green);
+            padding: 30px 25px;
+            border-radius: 30px;
+            margin-top: 20px;
+            margin-bottom: 100px;
+            text-align: left;
+            box-shadow: 0 0 50px rgba(0, 255, 102, 0.3);
+            animation: fadeInNote 1s var(--ease-apple) forwards;
+        }
+
+        .secret-note h2 { text-align: left; font-size: 2.2em; margin-bottom: 10px;}
+
+        .secret-note p {
+            font-size: 1.1em;
+            color: #fff;
+            line-height: 1.7;
+            margin-top: 15px;
+        }
+
+        @keyframes fadeInNote {
+            from { opacity: 0; transform: translateY(30px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* --- THE BIG GREEN BUTTON --- */
+        .action-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 85%;
+            max-width: 380px;
+            background: var(--neon-green);
+            color: #000;
+            border: none;
+            padding: 22px;
+            border-radius: 50px;
+            font-size: 1.3em;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            box-shadow: 0 0 30px rgba(0, 255, 102, 0.5);
+            cursor: pointer;
+            transition: all 0.2s var(--ease-apple);
+            z-index: 100;
+        }
+
+        .action-btn:active {
+            transform: translate(-50%, 5px);
+            box-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        /* Kinetic background animation */
+        @keyframes floatPath {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            50% { transform: translate(10px, 10px) scale(1.02) rotate(1deg); }
+            100% { transform: translate(-10px, -10px) scale(1) rotate(-1deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="kinetic-design-bg"></div>
+
+    <header>
+        <h1>hihihiihihihi</h1>
+        <p>its been a month lamo 😁</p>
+    </header>
+
+    <main>
+        <div class="glass-card observer">
+            <h2 class="glow-green">I LOVED THIS TYSM ❤️</h2>
+            <div class="image-memory-viz">
+                <div class="image-frame">
+                    <img src="image_0.png" alt="cool car">
+                </div>
+            </div>
+            <p style="text-align: center; font-size: 0.8em; margin-top: 10px; color: #666;">(Visual Representation)</p>
+        </div>
+
+        <div class="glass-card observer" style="background: rgba(40, 0, 0, 0.4); border-color: rgba(255,0,0,0.15);">
+            <h2 class="glow-red">VROOM VROOM</h2>
+            <div class="neon-track" onclick="hitTheGas()">
+                <div class="ferrari-wrapper drive-normal" id="sf24">
+                    <span class="ferrari-emoji">🏎️</span><span>💨</span>
+                </div>
+            </div>
+            <p style="text-align: center; font-size: 0.8em; color: var(--neon-red);">(idk how this is related but i jst wanted to try this lamo anyways try tapping on it it goes speed boyyyy)</p>
+        </div>
+
+        <div class="glass-card observer">
+            <h2 class="glow-green">Why dyu like chemistry so much?</h2>
+            <div class="lab-container">
+                <div class="beaker" onclick="react(this)">
+                    <div class="fluid ishaan"></div>
+                    <div class="bubbles"></div>
+                </div>
+                <div style="font-size: 2.5em; align-self: center; color: white;">+</div>
+                <div class="beaker" onclick="react(this)">
+                    <div class="fluid sudixsha"></div>
+                    <div class="bubbles"></div>
+                </div>
+            </div>
+            <p style="text-align: center; font-size: 0.8em; margin-top: 10px; color: #666;">(try tapping on the test tubes they get rlly woosh woosh)</p>
+        </div>
+
+        <div class="glass-card observer">
+            <h2 style="color: white; text-shadow: 0 0 10px rgba(255,255,255,0.2);">Kitkat>>>></h2>
+            <div class="kitkat-wrapper" onclick="snapKitKat(this)">
+                KIT KAT
+                <div class="crack"></div>
+            </div>
+            <p style="text-align: center; font-size: 0.8em; margin-top: 10px; color: #666;">(tap on it and we can share 😘)</p>
+        </div>
+
+        <div id="personalMessage" class="secret-note">
+            <h2 class="glow-green">To the prettiest girl i've met,</h2>
+            <p>
+                Om mah gwad it been one month waht the fudge. I love u sm cutie 💚. Btw ur rlly good at crocheting and baking (and making me fall for u 😍)
+
+                <br><br>
+                
+                <br><br>
+                Yours,<br>Ishaan 💚🏎️
+            </p>
+        </div>
+    </main>
+
+    <button class="action-btn" id="finalBtn" onclick="celebrate()">Launch Month 2</button>
+
+    <script>
+        // --- 1. VISUAL DESIGN GENERATOR: Cool Designs in Background ---
+        window.onload = () => {
+            generateKineticBg();
+            revealOnScroll(); // Initial check for visible cards
+        };
+
+        function generateKineticBg() {
+            const container = document.getElementById('kinetic-design-bg');
+            const svgNS = "http://www.w3.org/2000/svg";
+            const svg = document.createElementNS(svgNS, "svg");
+            svg.setAttribute("viewBox", "0 0 1000 1000");
+            svg.setAttribute("width", "100%");
+            svg.setAttribute("height", "100%");
+
+            for(let i=0; i<25; i++) {
+                // Generate interlocking loops (molecules/chains style)
+                const shape = document.createElementNS(svgNS, "path");
+                const x = Math.random() * 1000;
+                const y = Math.random() * 1000;
+                const size = Math.random() * 80 + 30;
+                const pathData = `M${x} ${y} a${size} ${size} 0 1 0 ${size*2} 0 a${size} ${size} 0 1 0 ${-size*2} 0 a${size/2} ${size/2} 0 1 1 ${size} 0`;
+                
+                shape.setAttribute("d", pathData);
+                shape.setAttribute("fill", "none");
+                // Subtle glowing green/red designs
+                shape.setAttribute("stroke", (Math.random() > 0.3) ? "#00ff66" : "#ff003c");
+                shape.setAttribute("stroke-width", Math.random() * 3 + 1);
+                shape.setAttribute("stroke-opacity", Math.random() * 0.5 + 0.1);
+                
+                // Floating animation logic
+                const animDuration = Math.random() * 15 + 10;
+                shape.style.animation = `floatPath ${animDuration}s ease-in-out infinite alternate`;
+                
+                svg.appendChild(shape);
+            }
+            container.appendChild(svg);
+        }
+
+        // --- 2. Scroll Reveal Logic (Apple style float-in) ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.observer').forEach(card => observer.observe(card));
+
+        // Initial check in case cards are already in view
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.observer');
+            for (let i = 0; i < reveals.length; i++) {
+                let windowHeight = window.innerHeight;
+                let elementTop = reveals[i].getBoundingClientRect().top;
+                let elementVisible = 100;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add('visible');
+                }
+            }
+        }
+        window.addEventListener('scroll', revealOnScroll);
+
+        // --- 3. Interaction Logic ---
+
+        // Interactive: Ferrari DRS (Turbo)
+        function hitTheGas() {
+            const carWrapper = document.getElementById('sf24');
+            carWrapper.classList.remove('drive-normal');
+            void carWrapper.offsetWidth; // Trigger reflow to restart animation
+            carWrapper.classList.add('drive-hyper');
+            
+            if (navigator.vibrate) navigator.vibrate([10, 30, 10]); // Short rapid feedback
+            
+            setTimeout(() => {
+                carWrapper.classList.remove('drive-hyper');
+                carWrapper.classList.add('drive-normal');
+            }, 500); // Reset after turbo
+        }
+
+        // Interactive: Chemistry Catalysis
+        function react(element) {
+            element.classList.toggle('reacting');
+            // Molecular connection haptic feel
+            if (navigator.vibrate) navigator.vibrate(50); 
+        }
+
+        // Interactive: KitKat Snap
+        function snapKitKat(element) {
+            element.classList.toggle('snapped');
+            // Crunch haptic feel
+            if (navigator.vibrate) navigator.vibrate([40, 60, 40]); 
+        }
+
+        // Interactive: Final Celebration & Message Reveal
+        let unlocked = false;
+        function celebrate() {
+            if (unlocked) return; // Prevent double clicking
+            unlocked = true;
+
+            const btn = document.getElementById('finalBtn');
+            btn.innerHTML = "ILYSM";
+            btn.style.background = "white";
+            btn.style.boxShadow = "0 0 50px white";
+            if (navigator.vibrate) navigator.vibrate(200);
+            
+            // Reveal the personal message note smoothly
+            const note = document.getElementById('personalMessage');
+            note.style.display = 'block';
+
+            // Smooth scroll down so she sees the message
+            setTimeout(() => {
+                window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            }, 200);
+            
+            // Create a spectacular explosion of green hearts and cars
+            for(let i=0; i<25; i++) {
+                let heart = document.createElement('div');
+                // Mix in green hearts and cars
+                heart.innerHTML = (Math.random() > 0.2) ? '💚' : '🏎️';
+                heart.style.position = 'fixed';
+                heart.style.left = '50vw';
+                heart.style.top = '100vh';
+                heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+                heart.style.transition = `all ${Math.random()*2+1}s cubic-bezier(0.1, 0.5, 0.3, 1)`;
+                heart.style.zIndex = '999';
+                document.body.appendChild(heart);
+                
+                setTimeout(() => {
+                    // Explode outward and upward spectacular burst
+                    heart.style.left = (Math.random() * 140 - 20) + 'vw';
+                    heart.style.top = (Math.random() * -50 + 20) + 'vh';
+                    heart.style.transform = `rotate(${Math.random() * 720}deg) scale(0)`;
+                }, 50);
+                
+                setTimeout(() => heart.remove(), 3000);
+            }
+        }
+    </script>
+</body>
+</html>
